@@ -1,14 +1,286 @@
 
 
 /* ***********************Custom Properties************************** */
+
+/*las defino en el selector Root es decir en la etiqueta Html por que con eso me aseguro
+    de que su alcansé esté para todo los selectores del documento
+*/
+:root{
+    --first-color: #d90062;
+    --first-alpha-color: rgba(217, 0, 98, 0.75);
+    --second-color: #14192d;
+    --second-alpha-color: rgba(20, 25, 45, 0.75);
+    --third-color: #501462;
+    --third-alpha-color: rgba(80, 20, 100, 0.75);
+    --white-color: #fff;
+    --gray-light-color: #f3f3f3;
+    --gray-color:#ccc;
+    --gray-dark-color: #666;
+    --black-color: #000;
+    --link-color: #509ee3;
+    --title-color: #333;
+    --text-color: #222;
+    --white-alpha-color: rgba(255, 255, 255, 0.5);
+    --black-alpha-color: rgba(0, 0, 0, 0.5);
+    /*tipografia*/
+    --font: "Raleway", sans-serif;
+    /*maxima tamaño de crecimiento*/
+    --max-width: 1200px;
+    --header-height: 4rem; /*equivale  a 64 px*/
+}
 /* ***********************Reset************************** */
+html{
+    /*modelo de caja: vamos hacer que el tamaño de la caja empieze desde el borde
+     y no desde el contenido como es por default por que si lo dejamos desde
+     el contenido corremos el riesgo de que cuando asignamos paddings o borders
+     pues los tamaños no correspondan*/
+    box-sizing: border-box;
+    font-family: var(--font); /*definimos la familia de fuente*/
+    font-size: 16px; /*tamaño de letra del html explicitamente, ¿Por que?  
+    por que como voy a estar utilizando la unidad de medida REM (rem es basado
+    en el tamaño de la tipografia de la etiqueta html*/
+
+    /*para la transicion*/
+    scroll-behavior: smooth;
+}
+
+
+
+
+/*con el selector universal todo los elementos su contenido generado dinamicamente
+    con after y before que hereden el tamaño de caja y ¿de quien van a heredar
+    el tamaño de caja? del nodo principal que es la etiqueta html
+*/
+*,
+*::after,
+*::before{
+    box-sizing: inherit; /*hereda*/
+}
+/*por defecto trae 8 pixeles de margin*/
+body{
+    margin: 0;
+    overflow-x: hidden; /*oculta todo lo que desborda en el eje x (horizontal) oculta la barra de desplazamiento*/
+    color: var(--text-color);
+}
+
+/*Estilo a los links*/
+a{
+    color: var(--link-color);
+    transition: all 0.5s ease-out;
+}
+
+a:hover{
+    opacity: 0.75;
+}
+
+/*todo los encabezados tienen un poco de margen ariba y abajo dependiendo
+    del nivel de encabezado van variando los márgenes, lo que me gusta es
+    resetar el margen de los encabezados a 0 y ya yo darle la distancia
+    adecuada
+*/
+h1{
+    margin: 0;
+    font-size: 2rem;
+}
+
+h2 {
+    margin: 0;
+    font-size: 1.5rem;
+}
+  
+h3 {
+    margin: 0;
+    font-size: 1.25rem;
+}
+  
+h4 {
+    margin: 0;
+    font-size: 1rem;
+}
+  
+h5 {
+    margin: 0;
+    font-size: 0.85rem;
+}
+  
+h6 {
+    margin: 0;
+    font-size: 0.7rem;
+}
+/*Imagenes Responsivas HACK*/
+img{
+    max-width: 100%;
+    height: auto;
+}
+/*Estilo a los párrafos*/
+p{
+    line-height: 1.6rem;
+    /* line-height: 1.2; */
+    /* line-height: normal; */
+    font-size: 1rem;
+}
+
 /* ***********************Componentes************************** */
+
+/* ***** HeroImage ***** */
+
+
+.hero-image{
+    background-image: ;
+}
+
+
+/* ***** Menú ***** */
+
+.menu-btn{
+    outline: thin solid var(--first-color);
+    border: 0;
+    cursor: pointer;
+    background-color: var(--second-color);
+}
+
+.menu-btn svg{
+    fill: var(--first-color); /*aplicamos relleno a los svg's*/
+}
+
+
+.menu{
+    /* display: none; */
+    position: fixed;
+    left: 0;
+    bottom: var(--header-height); /*distancia*/
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    background-color: var(--second-color);
+
+    opacity: 0; /*lo volvemos invicible*/
+    pointer-events: none;
+    transition: opacity 0.5s ease;
+}
+
+/*¿Cuando se va activar el menú, esta clase lo vamos a activar con JS?*/
+.menu.is-active{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.menu a{
+    padding: 1rem; /*pading de 1 rem a los 4 lados*/
+    font-size: 1.5rem;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: var(--first-color);
+}
+
+
+/*en el estado hover invertimos los colores*/
+.menu a:hover{
+    color: var(--white-color);
+    background-color: var(--first-color);
+}
+
+@media screen and (min-width: 64rem){ /*respeta espacios entre el AND*/
+    .menu-btn{
+        display: none;
+    }
+    .menu{
+        position: static;
+        opacity: 1;
+        width: auto;
+        flex-direction: row;
+        pointer-events: auto;
+    }
+    .menu a{
+        padding: 0 1rem;
+    }
+    .menu a:last-child{
+        padding-right: 0;
+    }
+    .menu a:hover{
+        background-color: transparent;
+    }
+    
+}
+
+
 /* ***********************Utilities************************** */
+
+.box-shadow-1{
+    /* box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.25); */
+    box-shadow: .25rem .25rem 1rem rgba(0, 0, 0, 0.25);
+}
+
+.btn{
+    border-radius: 0.5rem;
+    padding: 1rem;
+    /*los enlaces trabajan en linea pero quiero que tenga caracteristicas de linea y bloque*/
+    display: inline-block;
+    width: 200px;
+    font-weight: bold;
+    text-align: center;
+    text-decoration: none;
+    color: var(--white-color);
+    background-color: var(--first-color);
+}
+
+.container{
+    margin-left: auto;
+    margin-right: auto;
+    max-width: var(--max-width);
+}
+
+.none{
+    display: none;
+}
+
 /* ***********************Site Styles************************** */
 
+.header{
+    position: fixed; 
+    left: 0;
+    bottom: 0;
 
+    z-index: 999;
+    /*padding: 1rem; /*1rem + 1rem + 2 rem contenido = 4 rems se hace un centrado perfecto ♥😀*/
+    padding: calc((var(--header-height) - 2.35rem) * 0.5); /*2.35rem = 37.6px es el espacio que ocupa la letra del logo*/
+    width: 100%;/*ya que perdio sus propiedades de ancho y alto*/
+    height: var(--header-height);
+    background-color: var(--second-color);
+}
 
+.header > .container{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
 
+.logo a{
+    color: var(--first-color);
+    font-weight: bold;
+    font-size: 2rem;
+    line-height: normal;
+    text-decoration: none;
+}
+
+/* @media screen and (min-width:768px){ */
+@media screen and (min-width:48em){
+    
+}
+/* @media screen and (min-width:1024px){ */
+@media screen and (min-width:64em){
+    .header{
+        position: sticky;
+        top: 0;
+        padding: 0.5rem;
+        /*voy a modificar dinamicamente la altura de la cabezera*/
+        /* height: calc(var(--header-height) - 0.5rem); */ /*JONMIRCHA*/
+        /* height: var(--header-height); */
+        /**/
+        height: calc(2.35rem + 1rem);
+    }
+}
 
 
 
