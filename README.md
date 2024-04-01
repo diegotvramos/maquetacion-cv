@@ -409,3 +409,164 @@ lo multiplique por 0.5 por que dividirlo a 2 no me dio resultados.
 de la arquitectura CSS: que los nombres de los selectores tengan sentido  y sean semanticos al contenido que estás trabajando cada quien es libre de aplicar la nomenclatura para escribir su codigo CSS 
 
 > no vamos a usar un boton, vamos a usar un enlace.
+
+> En el HTML creo una image que se va a llamar --image y que su valor va ser la funcion URL de css y le paso la ruta, al definir esta bariable tiene un alcance va existir solo en el article.
+
+```html
+
+```
+
+esta tecnica me va permitir que cuando estemos maquetando la seccion de los clientes
+
+> El opacity solamente tiene como contenedor hijo `hero-image-content` entonces el modelo de flexbox me va servir se voy aplicar un centrado perfecto
+
+> el fondo se mantienen fijo mientras scrolleo el contenido
+
+Modificando el tamaño del titulo de la hero image, _para no estar cambiando el tamaño en cada una de las mediaQueries una de las cosas que yo hago cuando tengo estos textos grandes  que se vayan redimencionando de manera fluida es aplicarle un tamaño de font-zise basados en las unidades del viewPort_
+
+ para este componenete no hize media querys es una tecnica que está muy de moda que se llama fluid design: **Texto Fluido**  hacer responsive design con la menor cantidad posible de media querys
+
+
+### Marcado HTML seccion Acerca
+
+Tiene 3 columnas de contenido.
+
+el Frame de figma en ancho es 1280px
+
+La mayoria del contenido está alineado a esta guia que está a 40px y a 124px, sumanos dan 1280px 
+
+Por lo tanto el tamaño maximo de crecimiento en ancho al que tendria que ir esta seccion es de 1280px ? 
+
+esto me va permitir controlar el crecimiento eso significa que voy a ponerle un container en el maquetado html.
+
+> _Todo concepto que está en un idioma extrangero se tiene que poner en Itálica_ tolo los acrónimos, toda las palabras que esté en ingles (web, full stack frelanze...etc)
+
+no olvides poner el texto _`alt`_ por cuestiones de `SEO` por que cuando una imagen está rrota pues es lo que aparece visualmente  y tambien para las personas que son ciegas y tienen sus narradores ese es el texto que lee donde va la imagen
+```html
+    <article>
+            <h2>Mis habilidades</h2>
+            <div class="progress-b">
+                <p>
+                    <b>Desarrollo <i>Web Frontend</i></b>
+                    <b>80%</b>
+                </p>
+                <progress value="80" min="0" max="100"></progress>
+            </div>
+            <div class="progress-b">
+                <p>
+                    <b>Diseño <i>Web</i></b>
+                    <b>75%</b>
+                </p>
+                <progress value="75" min="0" max="100"></progress>
+            </div>
+            <div class="progress-b">
+                <p>
+                    <b>Desarrollo <i>Web Backend</i></b>
+                    <b>65%</b>
+                </p>
+                <progress value="65" min="0" max="100"></progress>
+            </div>
+            <div class="progress-b">
+                <p>
+                    <b><i>Marketing</i>de contenido</b>
+                    <b>70%</b>
+                </p>
+                <progress value="70" min="0" max="100"></progress>
+            </div>
+        </article>
+```
+
+
+### Componente Barra de Progreso
+
+vamos a utilizar una etiqueta muy joven en el estandar de html
+
+> para algunos navegadores se necesita una Pseudoclase `webkit, moz`
+
+
+las barras de progreso se van a adaptar al tamaño del contenedor no hay necesidad de hacer responsive design al igual que el tamaño de las letras que dice bien venid@s
+
+> Nos combiene generar algunas clases utilitarias con responsive design muy al estilo de bootstrap `text-center, text-medium-center, text-lg-center`.
+
+```css
+/* ******* ProgressBar ********* */
+
+progress{
+    width: 100%;
+    height: 1rem;
+    background-color: var(--gray-color);
+}
+
+progress::-webkit-progress-bar{
+    background-color: var(--gray-color);
+}
+
+progress::-webkit-progress-value{
+    background-color: var(--gray-dark-color);
+}
+
+progress::-moz-progress-bar{
+    background-color: var(--gray-dark-color);
+}
+
+.progress-b{
+    margin: 1rem auto;
+}
+.progress-b > p{
+    margin: 0;
+    display: flex;
+    justify-content: space-between;
+    font-size: 0.85rem;
+}
+
+```
+
+### Clases utilitarias Responsivas
+
+creamos clases utilitarias muy al estilo de Bootstrapt
+
+```css
+    .text-center{
+    text-align: center;
+}
+
+.text-left{
+    text-align: left;
+}
+
+.text-right{
+    text-align: right;
+}
+
+/*para pc creo una media query*/
+@media screen and (min-width:64rem){
+    .text-lg-center{
+        text-align: center;
+    }
+    
+    .text-lg-left{
+        text-align: left;
+    }
+    
+    .text-lg-right{
+        text-align: right;
+    }
+}
+```
+
+el texto del article en tamaño Large se va a la derecha. en lugar de estarme preucupando por selectores individuales de contenido cree unas clases utilitarias para la alineacion del texto y esas clases utilitarias me las podria pasar a otro proyecto por que son bastante genéricas.
+
+ve que las seccionenes tienen un espaciado solucion: darle un poco de padding
+
+ve que hay una separacion de cuando acaba un contenido (la seccion tiene 3 contenidos), pero son estilos muy _particulares_ solucion: `.about > article{margin-bottom: 2rem;}`
+
+### Maquetado Responsivo sección  Acerca
+
+vamos hacer uso de grid css.
+
+![responsive](/assets/responsive.JPG)
+
+ve que en la version para PC está seccion está a 3 columnas
+
+> recuerda: el grid el flujo por defecto es en filas y cuando tu no especificas las filas las filas se van generando implicitamente entonces aca lo importante era definir las columnas
+
