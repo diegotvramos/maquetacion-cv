@@ -570,3 +570,150 @@ ve que en la version para PC está seccion está a 3 columnas
 
 > recuerda: el grid el flujo por defecto es en filas y cuando tu no especificas las filas las filas se van generando implicitamente entonces aca lo importante era definir las columnas
 
+![agregar-container](/assets/agregar-container.JPG)
+
+pero mi pantalla es de 1920px full hd, ahora el tamaño maximo es de 1200 entonces nos hace falta agregar la clase utilitaria que ya tenemos llamada `container`
+
+```css
+     .full-lg-screen{
+        width: 100%;
+        min-height: 100vh;
+    }
+```
+
+> lo elegante de una landing Page es que el contenido abarque todo el espacio posible, entonces me voy a crear una clase utilitaria para aplicar el efecto  de `FULL-SCREEN`
+
+```css
+    .about{
+       display: grid;
+       grid-template-columns: repeat(3, 30%); /*sobra 10%*/
+       justify-content: space-between; /*el 10% sobrante lo distribuyo en espacios*/
+       align-content: center; /*en el eje de Y me lo alinea el contenido al centro*/
+    }
+
+```
+
+> _Quiero que se vayan dando cuenta que en algunas cosas sobre todo en el alineado interno de los componentes he usado ``Flexbox`` y en zonas especificas de maquetacion a diferentes columnas, estoy utilizando `Grid`_
+
+> Recuerda: _la metafora que les digo si ustedes aprenden `Flexbox y Grid`  se van a convertir en una navaja Suiza  de la maquetación  Web_
+
+### Marcado Html sección Servicios
+
+Ve que los titulos(encabezados) de las secciones tienen un mismo estilo. Entonces vamos a crear una clase utilitaria para el titulo de las secciones.
+
+![estilo-titulo-secciones](/assets/estilo-titulo-secciones.JPG)
+
+> primero vamos a enfocarnos para la version de Movil
+
+> Tengo que enfocarme  en diseñar  y luego replicar cada una de estas targenas, 
+
+> Muy importante! _Estas targetas van a estar dentro de un contenedor por que mira en la seccion de servicios tiene este fondo gris claro y ese color en Pc Fluye al 100% de la pantalla, pero el contenido si tiene máxima anchura_
+
+```html
+    <section id="servicios" class="services section">
+        <div class="container">
+            <h2 class="section-title">¿Qué te ofrezco?</h2>
+            <article class="service-card">
+                <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M20,3H4C2.897,3,2,3.897,2,5v14c0,1.103,0.897,2,2,2h16c1.103,0,2-0.897,2-2V5C22,3.897,21.103,3,20,3z M4,19V7h16 l0.002,12H4z"/><path d="M9.293 9.293L5.586 13 9.293 16.707 10.707 15.293 8.414 13 10.707 10.707zM14.707 9.293L13.293 10.707 15.586 13 13.293 15.293 14.707 16.707 18.414 13z"/></svg>
+                <h3>Programación <i>Web</i></h3>
+                <p>
+                    Desarrollo sitios y aplicaciones para plataformas <i>web</i>. Te ayudo a construir tu proyecto
+                    de principio a fin;<i>Frontend</i>, <i>Backend</i> y base de datos.
+                </p>
+            </article>
+        </div>
+    </section>
+```
+
+### Maquetando Componente Service Card.
+
+El fondo de la seccion tiene un fondo gris claro
+
+> el estilo de las targetitas son propias de este proyecto.
+
+> Ve que los iconitos son de color rosa, _Recuerda: a los SVGs les podemos aplicar la propiedad `FILL` y vamos a aplicarle un margin-Bootom_
+
+```css
+    .service-card{
+    margin: 1rem auto; /*ariba y a los costado (para que se centre)*/
+    padding: 1rem;
+    text-align: center;
+}
+
+.service-card h3{
+    color: var(--title-color);
+}
+
+.service-card svg{
+    margin-bottom: 1.25rem;
+    fill: var(--first-color);
+}
+```
+
+### Maquetado Responsivo seccion Servicios.
+
+Para la version de Tablet, vamos a trabajar a un grid de 2 columnas.
+
+Vamos a la media query de 768px = 48em rem, 
+
+¿Quíen es el elemento html que va aplicar el grid? no es la seccion `services` dentro tiene un contenedor `container` y ese contenedor es el que va delimitar la grid por que dentro tiene la h2  y sus `articles`.
+
+entonces al `container` es al que le voy aplicar display grid, entonces el container que es hijo directo de la clase `servises` aplicale grid.
+
+
+![reticula](/assets/reticula-grid.JPG)
+
+
+> _Recuerda: el titulo `H2` es un hijo del `container` entonces forma parte de la retícula de grid_ entonces ¿Sacamos del _container_ el _h2_? si lo sacamos puede que se salga de esos 1200px entonces al titulo le voy a decir que ocupe 2 columnas de la grid, es decir voy a aplicar un `span 2`
+
+Ahora vamos a llevar la secion de servicios a _full-creen_ y para eso ya tenemos una clase utilitaria,
+
+_Conforme vamos avanzando conforme vamos utilizando clases que ya hemos trabajado se va haciendo mas rrapido el desarrollo de las secciones_
+
+`full-lg-screen` no se lo vamos a aplicar al la etiqueta `section` por que el elemento que es display grid es el `container` y justamente el centrado se logra gracias al `align-content:center;` entonces el 
+
+> `full-lg-screen `es al container
+_miren que la seccion de servicios ya está centrada y finalmente el contenedor padre del `container` que es la seccion de servicios que tiene el color de fondo gris al tener un hijo que ocupa el tamaño del viewport pues el tambien crese_ 
+
+```css
+    .services > .container{
+        /*display: grid; /* ya no es necesario por que está definido en la media scren de 48EM rem*/
+        grid-template-columns: repeat(3, 30%);
+        /* justify-content: space-between; */
+        /* align-content: center; */
+    }
+
+    .services .section-title{
+        grid-column: span 3;
+    }
+```
+
+tengo dudas 🤔🤔🤔, no se centra muy bien, por que toma en cuenta todo el viewport, pero la cabecera es fijo, entonces el centrado deberia de hacerse de toda la pantalla restando la cabecera.
+
+### Marcado HTML seccion Portafolio.
+
+
+```html
+    <section id="portafolio" class="portfolio section">
+        <a href="#trabajo-1" class="portfolio-card">
+            <img src="assets/portfolio-1.jpg" alt="Trabajo 1">
+            <aside class="portfolio-card-info">
+                <div>
+                    <h3>Proyecto 1</h3>
+                    <p>
+                        Lorem ipsum dolor sit amet consectetur adipisicing elit. Repudiandae dolores commodi pariatur est nihil hic nemo a placeat fuga eum inventore quam ipsum id vel, maiores perspiciatis voluptas molestias cupiditate.
+                    </p>
+                </div>
+            </aside>
+        </a>
+    </section>    
+```
+
+### Maquetando Componente Portfolio Card
+
+esto tendria que estar en los estilos particulares.
+
+> `position:relative;` al contenedor de la targeta por que la informacion que va en el estado _Hover_ la voy a posicionar de manera absoluta, entonces la informacionq que va estar posicionada  de manera absoluta se posicione respecto de su elemento contenedor por eso es que le doy el `position:relative;`
+
+
+🤔🤔 al dar click a un proyecto el color azulado del click se sobrepone a la cabezera  y al menú

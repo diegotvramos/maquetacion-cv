@@ -262,6 +262,10 @@ progress::-moz-progress-bar{
 
 /* ***********************Utilities************************** */
 
+.bg-gray-light{
+    background-color: var(--gray-light-color);
+}
+
 .box-shadow-1{
     /* box-shadow: 4px 4px 16px rgba(0, 0, 0, 0.25); */
     box-shadow: .25rem .25rem 1rem rgba(0, 0, 0, 0.25);
@@ -298,6 +302,16 @@ progress::-moz-progress-bar{
     padding: 2rem 1rem;
 }
 
+.section-title{
+    border-top: thin solid var(--first-color);
+    border-bottom: thin solid var(--first-color);
+    margin: 2rem auto; /*Con esto se centra*/
+    padding: 0.5rem 1rem; /*nos sirve para separar el texto de los bordes de la caja*/
+    width: 250px;
+    text-align: center;
+    color: var(--title-color);
+}
+
 .text-center{
     text-align: center;
 }
@@ -310,8 +324,20 @@ progress::-moz-progress-bar{
     text-align: right;
 }
 
+
+@media screen and (min-width:48em){
+    .full-md-screen{
+        width: 100%;
+        min-height: 100vh;
+    }
+}
 /*para pc creo una media query*/
 @media screen and (min-width:64rem){
+    .full-lg-screen{
+        width: 100%;
+        min-height: 100vh;
+    }
+
     .text-lg-center{
         text-align: center;
     }
@@ -352,6 +378,51 @@ progress::-moz-progress-bar{
     align-items: center;
 }
 
+.portfolio-card{
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    display: block; /*para que  estén uno debajo del otro*/
+}
+
+.portfolio-card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portfolio-card-info{
+    position: absolute;
+    top: 0;
+    left: 0; /*le decimos que este sobre su elemento padre*/
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background-color: var(--first-alpha-color);
+    color: var(--white-color);
+    /*lo ocultamos igual que en el caso del menú*/
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5 ease-in-out;
+}
+
+/*lo volvemos a mostrar en el estado hover*/
+
+.portfolio-card:hover .portfolio-card-info{
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 990;
+}
+
+.portfolio-card-info > div{
+    padding: 1rem;
+    border: thin solid var(--white-color);
+    /*Oviamente se está adaptando a la altura de su contenedor*/
+    /*lo que voy hacer es darle todo el 100 % para que cresca ese borde*/
+    width: 100%;
+    height: 100%;
+}
+
 .logo a{
     color: var(--first-color);
     font-weight: bold;
@@ -360,9 +431,33 @@ progress::-moz-progress-bar{
     text-decoration: none;
 }
 
+.service-card{
+    margin: 1rem auto; /*ariba y a los costado (para que se centre)*/
+    padding: 1rem;
+    text-align: center;
+}
+
+.service-card h3{
+    color: var(--title-color);
+}
+
+.service-card svg{
+    margin-bottom: 1.25rem;
+    fill: var(--first-color);
+}
+
 /* @media screen and (min-width:768px){ */
 @media screen and (min-width:48em){
-    
+    .services > .container{
+        display: grid;
+        grid-template-columns: repeat(2, 45%);
+        justify-content: space-between;
+        align-content: center;
+    }
+
+    .services .section-title{
+        grid-column: span 2;
+    }
 }
 /* @media screen and (min-width:1024px){ */
 @media screen and (min-width:64em){
@@ -371,12 +466,13 @@ progress::-moz-progress-bar{
        display: grid;
        grid-template-columns: repeat(3, 30%); /*sobra 10%*/
        justify-content: space-between; /*el 10% sobrante lo distribuyo en espacios*/
-       align-content: center;
+       align-content: center; /*en el eje de Y me lo alinea el contenido al centro*/
     }
 
 
     .header{
         position: sticky;
+        /* position: fixed; */
         top: 0;
         padding: 0.5rem;
         /*voy a modificar dinamicamente la altura de la cabezera*/
@@ -384,6 +480,17 @@ progress::-moz-progress-bar{
         /* height: var(--header-height); */
         /**/
         height: calc(2.35rem + 1rem);
+    }
+
+    .services > .container{
+        /*display: grid; /* ya no es necesario por que está definido en la media scren de 48EM rem*/
+        grid-template-columns: repeat(3, 30%);
+        /* justify-content: space-between; */
+        /* align-content: center; */
+    }
+
+    .services .section-title{
+        grid-column: span 3;
     }
 }
 
