@@ -1056,3 +1056,32 @@ todo este codigo te lo puedes llevar a otro proyecto
 Primero vamos a enfocarnos en la version Movile.
 
 > Importante _Estoy son estilos particulares_ por que este contenido modal podria variar al de otro proyecto.
+
+el modal horizontal lo debo aplicar en la media query de la tableta por que asi está definido en el Figma
+
+```css
+    .portfolio-modal{
+    padding: 1rem;
+    max-width: 400px; /*la imagen no se deforma por que la etiqueta 'IMG' ya tiene estilos*/
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white-color);
+}
+
+.portfolio-modal h3{
+    border-bottom: medium solid var(--first-color);
+    margin: 1rem auto; /*ariba y bajo, Costados*/
+    padding: 0.5rem 0;
+    color: var(--title-color);
+}
+
+.portfolio-details{
+    display: grid;
+    grid-template-columns: 30% 70%; 
+    grid-auto-rows: 2rem; /*como las filas se acomodan implicitamente le doy una latura*/
+}
+
+.portfolio-details b{
+    color: var(--first-color);
+}
+```

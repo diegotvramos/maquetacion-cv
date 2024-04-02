@@ -484,6 +484,32 @@ progress::-moz-progress-bar{
     height: 100%;
 }
 
+.portfolio-modal{
+    padding: 1rem;
+    max-width: 400px; /*la imagen no se deforma por que la etiqueta 'IMG' ya tiene estilos*/
+    display: flex;
+    flex-direction: column;
+    background-color: var(--white-color);
+}
+
+.portfolio-modal h3{
+    border-bottom: medium solid var(--first-color);
+    margin: 1rem auto; /*ariba y bajo, Costados*/
+    padding: 0.5rem 0;
+    color: var(--title-color);
+    text-align: center;
+}
+
+.portfolio-details{
+    display: grid;
+    grid-template-columns: 30% 70%; 
+    grid-auto-rows: 2rem; /*como las filas se acomodan implicitamente le doy una latura*/
+}
+
+.portfolio-details b{
+    color: var(--first-color);
+}
+
 .logo a{
     color: var(--first-color);
     font-weight: bold;
@@ -520,6 +546,15 @@ progress::-moz-progress-bar{
         grid-column: span 2;
     }
 
+    .portfolio-modal{
+        max-width: 800px;
+        flex-direction: row;
+    }
+
+    .portfolio-info{
+        margin-left: 1rem;
+        align-self: center; /*Centra en el eje "Y" y deja respirar al boton X*/
+    }
 
     .services > .container{
         display: grid;
