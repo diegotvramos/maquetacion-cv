@@ -21,7 +21,7 @@
     --title-color: #333;
     --text-color: #222;
     --white-alpha-color: rgba(255, 255, 255, 0.5);
-    --black-alpha-color: rgba(0, 0, 0, 0.5);
+    --black-alpha-color: rgba(0, 0, 0, 0.05);
     /*tipografia*/
     --font: "Raleway", sans-serif;
     /*maxima tamaño de crecimiento*/
@@ -63,10 +63,17 @@ body{
     color: var(--text-color);
 }
 
+
+
 /*Estilo a los links*/
 a{
     color: var(--link-color);
     transition: all 0.5s ease-out;
+}
+
+/*le quita ese azul al hcer click*/
+* {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
 a:hover{
@@ -221,7 +228,62 @@ p{
     .menu a:hover{
         background-color: transparent;
     }
-    
+}
+
+/**** Modal ****/
+
+.modal{
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--black-alpha-color);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 1s;
+}
+
+.modal-content{
+    position: relative;
+}
+
+.modal-close{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.modal-close svg{
+    width: 3rem;
+    height: 3rem;
+    fill: var(--first-color);
+}
+
+/*¿Cómo voy hacer que se abra el contenido modal?*/
+
+/*Estos estilos van a aplicar cuando el target de la página esté en este ID
+interno*/
+
+
+/*cuando la ventana modal id(trabajo 1) y  esté en el target  de la página
+simplemente le dicemos: que active estos estilos || target es un pseudoelemento*/
+/* .modal#trabajo-1:target{
+} */
+
+/*Con los selectores de atributos puedo usar el simbolos del 'PAIP, TILDE Y CIRCUNFLEJO'
+ para decirle: quiero que el valor de este atributo empieze o termine o tenga 
+ dentro de su valor estas palabras entonces aplique estos estilos
+
+
+*/
+.modal[id|="trabajo"]:target{
+    opacity: 1;
+    pointer-events: auto;
 }
 
 /* ******* ProgressBar ********* */
@@ -403,7 +465,7 @@ progress::-moz-progress-bar{
     /*lo ocultamos igual que en el caso del menú*/
     opacity: 0;
     pointer-events: none;
-    transition: all 0.5 ease-in-out;
+    transition: all 0.5s ease-in-out; /*no olvides poner la S*/
 }
 
 /*lo volvemos a mostrar en el estado hover*/
@@ -411,7 +473,6 @@ progress::-moz-progress-bar{
 .portfolio-card:hover .portfolio-card-info{
     opacity: 1;
     pointer-events: auto;
-    z-index: 990;
 }
 
 .portfolio-card-info > div{
@@ -448,6 +509,18 @@ progress::-moz-progress-bar{
 
 /* @media screen and (min-width:768px){ */
 @media screen and (min-width:48em){
+
+    .portfolio > .container{ /*adentro tienes un hijo(elemento) directo*/
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+    }
+
+    /*para que el título ocupe 2 columnas*/
+    .portfolio .section-title{
+        grid-column: span 2;
+    }
+
+
     .services > .container{
         display: grid;
         grid-template-columns: repeat(2, 45%);
@@ -458,6 +531,7 @@ progress::-moz-progress-bar{
     .services .section-title{
         grid-column: span 2;
     }
+
 }
 /* @media screen and (min-width:1024px){ */
 @media screen and (min-width:64em){
@@ -480,6 +554,15 @@ progress::-moz-progress-bar{
         /* height: var(--header-height); */
         /**/
         height: calc(2.35rem + 1rem);
+    }
+
+    .portfolio > .container{ /*adentro tienes un hijo(elemento) directo*/
+        grid-template-columns: repeat(3,1fr); /*100 / 3  = 3.33333  mejor usamos fraccion.😲😯😲😲*/
+    }
+
+    /*para que el título ocupe 2 columnas*/
+    .portfolio .section-title{
+        grid-column: span 3;
     }
 
     .services > .container{

@@ -715,5 +715,188 @@ esto tendria que estar en los estilos particulares.
 
 > `position:relative;` al contenedor de la targeta por que la informacion que va en el estado _Hover_ la voy a posicionar de manera absoluta, entonces la informacionq que va estar posicionada  de manera absoluta se posicione respecto de su elemento contenedor por eso es que le doy el `position:relative;`
 
+```css
+    .portfolio-card{
+    position: relative;
+    width: 100%;
+    margin: 0 auto;
+    display: block; /*para que  estén uno debajo del otro*/
+}
+
+.portfolio-card img{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.portfolio-card-info{
+    position: absolute;
+    top: 0;
+    left: 0; /*le decimos que este sobre su elemento padre*/
+    width: 100%;
+    height: 100%;
+    padding: 1rem;
+    background-color: var(--first-alpha-color);
+    color: var(--white-color);
+    /*lo ocultamos igual que en el caso del menú*/
+    opacity: 0;
+    pointer-events: none;
+    transition: all 0.5 ease-in-out;
+}
+
+/*lo volvemos a mostrar en el estado hover*/
+
+.portfolio-card:hover .portfolio-card-info{
+    opacity: 1;
+    pointer-events: auto;
+    z-index: 990;
+}
+
+.portfolio-card-info > div{
+    padding: 1rem;
+    border: thin solid var(--white-color);
+    /*Oviamente se está adaptando a la altura de su contenedor*/
+    /*lo que voy hacer es darle todo el 100 % para que cresca ese borde*/
+    width: 100%;
+    height: 100%;
+}
+```
+
 
 🤔🤔 al dar click a un proyecto el color azulado del click se sobrepone a la cabezera  y al menú
+
+google : 🔍 al hacer click sobre una imagen se vuelve azul css
+
+https://es.stackoverflow.com/questions/190305/quitar-cuadro-azul-al-hacer-clic-en-icono-o-imagen-tipo-boton
+
+> me sirvio mucho 🤗  para que ese atributo css se aplique a todo
+
+```css
+    * {
+    -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
+    }
+```
+
+
+### Maquetando Responsivo seccion  Portafolio.
+
+antes: Las 6 targetas lo ponemos a un contenedor `container`. Hace que cuando estemos a mas de 1200px pues el contenido se centra. 
+
+En la version movile no hay que hacer nada.
+
+```css
+    @media screen and (min-width:48em){
+        .portfolio > .container{ /*adentro tienes un hijo(elemento) directo*/
+        display: grid;
+        grid-template-columns: repeat(2, 50%);
+    }
+
+    /*para que el título ocupe 2 columnas*/
+    .portfolio .section-title{
+        grid-column: span 2;
+    }
+    }
+
+    @media screen and (min-width:64em){
+        .portfolio > .container{ /*adentro tienes un hijo(elemento) directo*/
+        grid-template-columns: repeat(3,1fr); /*100 / 3  = 3.33333  mejor usamos fraccion.😲😯😲😲*/
+    }
+
+    /*para que el título ocupe 2 columnas*/
+    .portfolio .section-title{
+        grid-column: span 3;
+    }
+    }
+```
+
+### Componente Modal sin JavaScript 
+
+Primero vamos a planear el etiquetado html de una ventana modal
+
+>¿Qué necesitaria nuestra ventana modal? debe tener el Id al que está apuntando el enlace. Van a astar afuera de la etiqueta `section`
+
+> el selector `.modal` tiene un solo elmento hijo y al aplicar flex va hacer que se centre.
+
+> La ventana modal como tal tiene que estar con una opacidad de 0
+
+> La ventaba modal apunta a un id que no existe `#cerrar`
+
+```css
+
+/**** Modal ****/
+
+.modal{
+    position: fixed;
+    z-index: 999;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--black-alpha-color);
+    opacity: 0;
+    pointer-events: none;
+    transition: all 1s;
+}
+
+.modal-content{
+    position: relative;
+}
+
+.modal-close{
+    position: absolute;
+    top: 1rem;
+    right: 1rem;
+}
+
+.modal-close svg{
+    width: 3rem;
+    height: 3rem;
+    fill: var(--first-color);
+}
+
+/*¿Cómo voy hacer que se abra el contenido modal?*/
+
+/*Estos estilos van a aplicar cuando el target de la página esté en este ID
+interno*/
+
+
+/*cuando la ventana modal id(trabajo 1) y  esté en el target  de la página
+simplemente le dicemos: que active estos estilos || target es un pseudoelemento*/
+/* .modal#trabajo-1:target{
+} */
+
+/*Con los selectores de atributos puedo usar el simbolos del 'PAIP, TILDE Y CIRCUNFLEJO'
+ para decirle: quiero que el valor de este atributo empieze o termine o tenga 
+ dentro de su valor estas palabras entonces aplique estos estilos
+
+
+*/
+.modal[id|="trabajo"]:target{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+```
+
+> Cuando un elemento que tiene la clase modal y que aparte en su ID de `trabajo-1` y aparte esté en el _target_ de la página activa estos estilos
+
+
+> _El paip significa que lo que va validar este selector css es que cualquier ventana modal que en su atributo Id  empieze con la palabra trabajo se va activar_
+
+> lo que está haciendo este selector avanzado es buscar todo los elementos que tenga la clase modal y que su nombre de id empieze con la palabra `trabajo` y aparte sean el target de la página en esos momentos, eso es lo que me permite no tener que estar escribiendo:
+
+```css
+    .modal#trabajo-1:target,
+    .modal#trabajo-2:target{
+        etc...
+    }
+```
+
+Si yo tubiera otra seccion donde voy a abrir otras ventanas modales, eje: la seccion de servicios pues trata de que todas esas ventanas modales empiezen igual `servicios-1, servicios-2, servicios-3.... servicios-n` para que tengamos que aplicar un selector especial, 
+
+evitamos JS para activar esa ventana modal y con esto ya tenemos una ventana modal
+
+todo este codigo te lo puedes llevar a otro proyecto
