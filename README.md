@@ -1112,4 +1112,16 @@ el contenido (titulo, la foto, la descripcion) lo vamos a colocar dentro de un `
 
 ### Marcado HTML Componente Carousel
 
-el name se tiene que llamr igual
+el _name_ se tiene que llamar igual para que intercambien entre ellos y cada uno de estos va hacer referencia a una imagen, muy similar a lo que hicimos en la ventana modal que usamos la _seudoclase Target_ aca vamos a usar la _seudoclase Checked_  para poder pasar de una imagen a otra, entonces hay que darle ids independientes (`slide-1, slide-2, slide-3`)
+
+Uno de ellos tiene que ser la primera imagén a mostrar entonces a ese le ponemos el atributo `checked`
+
+![circulitos](/assets/circulitos.JPG)
+
+Adicionalmente los chekeds los vamos a ocultar y estos circulitos van a ser las labels que están vinculadas a esos inputs
+
+![labels](/assets/labels.JPG)
+
+Si yo preciono las etiquetas ve como los checkbox van cambiando
+
+las etiquetas _`blockquote`_ las utilizamos para poner fraces que nosotros no decimos sino cosas que estamos citando
