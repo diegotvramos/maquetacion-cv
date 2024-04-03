@@ -1085,3 +1085,31 @@ el modal horizontal lo debo aplicar en la media query de la tableta por que asi 
     color: var(--first-color);
 }
 ```
+
+### Marcado HTML sección Testimonios
+
+
+Copiamos la ``Herro-image``. y lo pegamos en la seccion de testimosios, cambiamos el fondo y aplicamos una clase para pornerlo en blanco alpha.
+
+El atachment de la imagen de fondo tiene va con e contenido entonces aplicamos la propiedad: scroll, así `--hero-attachment: scroll;`
+
+el contenido (titulo, la foto, la descripcion) lo vamos a colocar dentro de un `container` por que como tal este contenido  no fluye al 100% entonces vamos a delimitarlo en un ``container`` 
+
+```html
+<article class="hero-image" style="--hero-image: url(assets/hero-image-customers.jpg); --hero-attachment:scroll;">
+            <aside class="hero-image-opacity" style="--hero-opacity-color:var(--white-alpha-color)">
+                <div class="hero-image-content">
+                    <div class="container">
+                        <h2 class="section-title">Mis clientes dicen</h2>
+                        <article class="carousel" style="">
+                            
+                        </article>
+                    </div>
+                </div>
+            </aside>
+        </article>    
+```
+
+### Marcado HTML Componente Carousel
+
+el name se tiene que llamr igual
