@@ -1125,3 +1125,37 @@ Adicionalmente los chekeds los vamos a ocultar y estos circulitos van a ser las 
 Si yo preciono las etiquetas ve como los checkbox van cambiando
 
 las etiquetas _`blockquote`_ las utilizamos para poner fraces que nosotros no decimos sino cosas que estamos citando
+
+### Maquetando componente Carousel
+
+Los imputs si o si deben ir arriba de la lista de _slides_ por que la _seudoclase: checked_ que va hacer la transicion de un slide a otro no funcionaria. por que vamos a usar un selector avanzado de css que cumple esta funcionalidad
+
+ve que la imagen de la persona que dá el testimonio está en un circulo, y el nombre del cliente tiene el color principal 
+
+ve a la seccion de las **clases utilitarias**
+
+
+```css
+.avatar{
+    border-radius: 50%;
+    width: 150px;
+    height: 150px;
+}
+.text-first-color{
+    color: var(--first-color);
+}
+    
+```
+
+El carousel como tal va ser un componenete que podemos reutilizar en otros proyectos, entonces vamos a la zona de **Componentes**
+
+```css
+    .carousel input{
+    display: none;
+}
+```
+
+> los checkbox los vamos a ocultar
+
+ahora, esos controles van a ser las _labels_
+
