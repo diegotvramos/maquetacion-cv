@@ -59,7 +59,7 @@ html{
 /*por defecto trae 8 pixeles de margin*/
 body{
     margin: 0;
-    overflow-x: hidden; /*oculta todo lo que desborda en el eje x (horizontal) oculta la barra de desplazamiento*/
+    /*overflow-x: hidden; /*oculta todo lo que desborda en el eje x (horizontal) oculta la barra de desplazamiento*/
     color: var(--text-color);
 }
 
@@ -133,17 +133,47 @@ p{
 .carousel{
     margin: 2rem auto;
     padding: 2rem 0;
-    max-width: 800px;
+    max-width: 80vw ; /*solocionó el error de tamaño de carousel en version movile*/
     text-align: center;
     background-color: var(--carousel-bg-color);
+    overflow-x: hidden; /*ocultamos el contenido que exede el borde izquierdo y derecho*/
+}
+
+.carousel .slides{
+
+    padding-left: 0;
+    /*debes sumarle un 100% al ancho por cada slide*/
+    width: 400%;
+    display: flex;
+    list-style: none; /*quita los bulets*/
+    transition: transform 0.5s ease-in-out;
+    
 }
 
 .carousel input{
-    display: none;
+    /* display: none; */
 }
 
 .carousel label{
-    
+    border: medium solid var(--gray-dark-color);
+    border-radius: 50%;
+    margin: 0 0.25rem;
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    cursor: pointer;
+}
+#slide-1:checked ~ .slides{
+    transform: translateX(0%);
+}
+#slide-2:checked ~ .slides{
+    transform: translateX(-25%);
+}
+#slide-3:checked ~ .slides{
+    transform: translateX(-50%);
+}
+#slide-4:checked ~ .slides{
+    transform: translateX(-75%);
 }
 
 /* ***** HeroImage ***** */

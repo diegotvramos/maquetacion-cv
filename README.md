@@ -1157,5 +1157,88 @@ El carousel como tal va ser un componenete que podemos reutilizar en otros proye
 
 > los checkbox los vamos a ocultar
 
-ahora, esos controles van a ser las _labels_
+ahora, esos controles van a ser las _labels_  las labels trabajan en linea entonces hay que aplicar un `display: inline-block;` para que tengan caracteristicas de bloqu
 
+> visualmente no me dice que es un elemento interactivo entonces podriamos poner el `cursor: pointer;`.
+
+```css
+    .carousel label{
+    border: medium solid var(--gray-dark-color);
+    border-radius: 50%;
+    margin: 0 0.25rem;
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    cursor: pointer;
+}
+```
+
+¿Como vamos a hacer que estos slides se vena uno a uno? para eso vamos hacer una tecnica de overflow y display-flex.
+
+cada una de las _slides_ ahorita están en vertical por que son _li_ de ul  pues estén en una sola linea horizontal, antiguamente esta tecnica se hacia con _floats_ pero con _displayFlex_ y _overflowHiden_ lo vamos a resolver de una manera mas óptima
+
+### Transiciones componente Carousel in javaScript
+
+![vertical](/assets/vertical.JPG)
+
+lo vamos a cambiar a horizontal y para eso nos vamos a ayudar de nuestra herramienta de maquetación flexbox.
+
+a la ul del carusel.
+
+```css
+
+```
+![horizontal](/assets/horizontal.JPG)
+
+lo que vamos hacer es mover este carousel con _Transiciones_
+
+La transicion va a aplicar sobre la propiedad css _Transform_
+
+Por que vamos a utilizar la función _translate_
+
+> **~ simbolo de tilde**  es un selector en css que significa mueve el hermano que tienes a lado
+
+Claro, con gusto te explico este fragmento de código CSS:
+
+```css
+#slide-1:checked ~ .slides {
+    transform: translateX(0%);
+}
+
+
+```
+
+Este selector CSS está diseñado para afectar elementos en el documento HTML cuando el elemento con el id `slide-1` está **seleccionado** (por ejemplo, cuando un checkbox está marcado). Aquí está lo que hace:
+
+1. `#slide-1:checked`: Selecciona el elemento con el id `slide-1` cuando está marcado (por ejemplo, cuando un checkbox con ese id está seleccionado).
+
+2. `~`: El operador de hermano adyacente. Significa que afectará a los elementos que son hermanos adyacentes del elemento seleccionado.
+
+3. `.slides`: Selecciona todos los elementos con la clase `.slides`.
+
+4. `transform: translateX(0%);`: Aplica una transformación de desplazamiento horizontal a los elementos seleccionados. En este caso, se desplazan un 0% hacia la derecha (sin desplazamiento).
+
+En resumen, cuando el elemento con el id `slide-1` está marcado, se aplicará una transformación de desplazamiento horizontal nulo a todos los elementos con la clase `.slides`. Esto podría usarse, por ejemplo, para crear un efecto de deslizamiento en una presentación de diapositivas. 😊
+
+
+
+La propiedad **`overflow-x: hidden;`** en CSS controla el comportamiento de un elemento cuando su contenido excede su tamaño en el eje horizontal (horizontalmente). Aquí está lo que significa:
+
+- **`overflow-x: hidden;`**: Cuando se aplica esta propiedad a un elemento, el contenido que sobrepasa los límites del elemento en el eje X (horizontal) se **oculta** y no es visible para el usuario⁶⁸. En otras palabras:
+
+    - El contenido que se extiende más allá de los bordes izquierdo y derecho del elemento se recorta y no se muestra.
+    - No se proporcionan barras de desplazamiento para permitir que el usuario vea el contenido oculto.
+    - Esto es útil cuando deseas evitar que el contenido se desplace horizontalmente y mantenerlo dentro de los límites del elemento.
+
+En tu caso específico, el uso de `overflow-x: hidden;` podría estar relacionado con el carrusel de tarjetas que mencionas. Al ocultar el desplazamiento horizontal, puedes lograr que las tarjetas se superpongan sin afectar el diseño general del carrusel. Sin embargo, ten en cuenta que esta propiedad también puede afectar otros elementos dentro del contenedor, por lo que debes considerar cuidadosamente su aplicación en tu diseño¹.
+
+Recuerda que esta propiedad se aplica solo al eje X (horizontal). Si también deseas controlar el desbordamiento vertical, puedes usar la propiedad **`overflow-y`**[^10^]. 😊
+
+¿por que se vé como que no está centrado?
+Recuerda que son list-item(**li**) y una (**ol**)o una(**ul**) mantiene un cierto espaciado de padding left que es lo que hace la separacion del bullet
+
+> `padding-left: 0;`
+
+un ancho de **800px** se representa como **80vw** en términos de unidades del viewport. 😊
+
+Si quiero hacer el movimiento automático ahi si tendria que usar java script o 
