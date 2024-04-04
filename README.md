@@ -1186,7 +1186,62 @@ lo vamos a cambiar a horizontal y para eso nos vamos a ayudar de nuestra herrami
 a la ul del carusel.
 
 ```css
+    /*la desventaja es que debo volver a recalcular en caso de 5 slides*/
 
+.carousel{
+    margin: 2rem auto;
+    padding: 2rem 0;
+    max-width: 100vw; /*solocionó el error de tamaño de carousel en version movile*/
+    text-align: center;
+    background-color: var(--carousel-bg-color);
+    overflow-x: hidden; /*ocultamos el contenido que exede el borde izquierdo y derecho*/
+}
+
+.carousel .slides{
+
+    padding-left: 0;
+    /*debes sumarle un 100% al ancho por cada slide*/
+    width: 400%;
+    display: flex;
+    list-style: none; /*quita los bulets*/
+    transition: transform 0.5s ease-in-out;
+    animation: carousel-slide 12s ease-in-out 3s; /*podriamos ponerla de forma infinita pero los controles de los checbox no nos van a obedecer*/
+    /*que dé un delete de 3s despues de que el navegador carga*/
+}
+
+.carousel input{
+    display: none;
+}
+
+.carousel label{
+    border: medium solid var(--gray-dark-color);
+    border-radius: 50%;
+    margin: 0 0.25rem;
+    display: inline-block;
+    width: 0.75rem;
+    height: 0.75rem;
+    cursor: pointer;
+}
+#slide-1:checked ~ .slides{
+    transform: translateX(0%);
+}
+#slide-2:checked ~ .slides{
+    transform: translateX(-25%);
+}
+#slide-3:checked ~ .slides{
+    transform: translateX(-50%);
+}
+#slide-4:checked ~ .slides{
+    transform: translateX(-75%);
+}
+
+/*para marcar los cuadritos*/
+#slide-1:checked ~ .slides-nav label#dot-1,
+#slide-2:checked ~ .slides-nav label#dot-2,
+#slide-3:checked ~ .slides-nav label#dot-3,
+#slide-4:checked ~ .slides-nav label#dot-4{
+    background-color: var(--gray-dark-color);
+}
 ```
 ![horizontal](/assets/horizontal.JPG)
 
@@ -1241,4 +1296,59 @@ Recuerda que son list-item(**li**) y una (**ol**)o una(**ul**) mantiene un ciert
 
 un ancho de **800px** se representa como **80vw** en términos de unidades del viewport. 😊
 
-Si quiero hacer el movimiento automático ahi si tendria que usar java script o 
+Si quiero hacer el movimiento automático ahi si tendria que usar java script o hacer una animacion que vaya recoriendo el movimiento a cada segundo.
+
+Ve que si selecciono los elementos de los labels de los imputs no se marcan.
+
+![no-se-seleccionan](/assets/no-selecciona.JPG)
+
+
+Cuando el slide 1 esté marcado entonces 
+(usamos tilde ~ que es el selector de hermanos adyasentes) 
+recuerda que las labels están dentro de .slides-nav,
+y ami me interesa que cuando esté marcado el slide-1 la primer label la label que tiene el id _dot-1_ le ponga un color de fondo 
+
+
+```css
+    /*para marcar los cuadritos*/
+#slide-1:checked ~ .slides-nav label#dot-1,
+#slide-2:checked ~ .slides-nav label#dot-2,
+#slide-3:checked ~ .slides-nav label#dot-3,
+#slide-4:checked ~ .slides-nav label#dot-4{
+    background-color: var(--gray-dark-color);
+}
+```
+
+Recuerda que no estamos utilizando JS y recuerda que mientras menos JS utilizemos,  el rendimiento de carga de tu sitio o aplicación va mejorar indiscutiblemente.
+
+¿Cuál es la desventaja?
+
+Si yo agregará un slide más, primero mover de 400% a 500% , volver hacer el calculo 100 / 5 
+
+### Animación automática componenete Carousel sin javaScript
+
+vamos a usar un _Keyframes_ (tenemos un fotograma por porcentaje) podemos hacer una animacion de 1 al 100% 
+
+```css
+
+    @keyframes carousel-slide{
+    0% {
+        transform: translateX(0%);
+    }
+    25% {
+        transform: translateX(-25%);
+    }
+    50% {
+        transform: translateX(-50%);
+    }
+    75% {
+        transform: translateX(-75%);
+    }
+}
+
+```
+###
+
+
+
+
