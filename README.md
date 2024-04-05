@@ -1347,7 +1347,15 @@ vamos a usar un _Keyframes_ (tenemos un fotograma por porcentaje) podemos hacer 
 }
 
 ```
-###
+### Marcado HTML sección Contacto
+
+Ve que todo el contenido en Descktop su máximo cresimiento son los 1200px eso significa que vamos a poner el contenido en un _container_(conenedor) 
+
+> Importante: _El teléfono lo voy a encerrar en un enlace por que cuando la gente esté desde un dispositivo mobil por que estaria marcando en un dispositivo movil, osea pasaria a la aplicacion del teléfono que hace la marcacion_
+
+En el _href_ ustedes pueden poner el protocolo `tel:`
+
+> _para los emails puedes utilizar el protocolo `mailto`_
 
 
 
