@@ -503,6 +503,16 @@ progress::-moz-progress-bar{
     margin-bottom: 2rem;
 }
 
+.contact-card{
+   margin: 1rem auto; 
+   padding: 2rem; 
+   width: 100%;/*que herede el 100% del contenedor en el que están */   
+   height: 144px; /*por que esa altura está en el Figma*/
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   align-items: center; /*en el eje transversal que en este caso seia x */
+}
 
 .header{
     position: fixed; 

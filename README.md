@@ -1357,6 +1357,89 @@ En el _href_ ustedes pueden poner el protocolo `tel:`
 
 > _para los emails puedes utilizar el protocolo `mailto`_
 
+```html
+    <article class="contact-cards">
+                <aside class="contact-card box-shadow-1">
+                    <h5>UBICACIÓN</h5>
+                    <small>El Alto, La Paz, Bolivia</small>
+                </aside>
+                <aside class="contact-card box-shadow-1">
+                          
+                    <h5>TELÉFONO</h5>
+                    <small><a href="tel:76503020">(+591) 76503020</a></small>
+                </aside>
+                <aside class="contact-card box-shadow-1">
+                    
+                    <h5>EMAIL</h5>
+                    <small><a href="mailto:diegovillacortaramos@gmail.com">diegovillacortaramos@gmail.com</a></small>
+                </aside>
+                <aside class="contact-card box-shadow-1">
+                    
+                    <h5>SOCIAL MEDIA</h5>
+                    <small class="social-media">
+                        <a href="https://www.youtube.com/@diegotvramos" target="_blank" rel="noopener">
+                            
+                          </a>
+                          <a href="https://twitter.com/diegotvramos" target="_blank" rel="noopener">
+                            
+                          </a>
+                          <a href="https://github.com/diegotvramos" target="_blank" rel="noopener">
+                            
+                          </a>
+                          <a href="https://www.linkedin.com/in/diegotvramos" target="_blank" rel="noopener">
+                          
+                          </a>
+                          <a href="https://instagram.com/diegotvramos" target="_blank" rel="noopener">
+                            
+                          </a>
+                    </small>
+                </aside>
 
+            </article>
+```
+
+### Marcado HTML Formulario
+
+> las expreciones regulares validan los datos que introduce el usuario en la parte visual.
+
+> "¡Muchas Gracias! <br> Por tus comentarios " ese mensaje va a aparecer cuando ayamos programado el formulario
+
+```html
+    <form class="contact-form box-shadow-1">
+                <input type="text" name="name" placeholder="Ingresa tu nombre" title="Nombre sólo acepta letras y espacios en blanco" pattern="^[A-Za-zÑñÁáÉéÍíÓóÚúÜü\s]+$" required>
+                <input type="email" name="email" placeholder="Ingresa tu correo *" title="Email incorrecto" pattern= "^[a-z0-9]+(\.[_a-z0-9]+)*@[a-z0-9-]+(\.[a-z0-9-]+)*(\.[a-z]{2,15})$" required>
+                <textarea name="commets" cols="50" rows="10" placeholder="Déjame tus comentarios *" required></textarea>
+                <div class="contact-form-loader">
+                    <img src="assets/loader.svg" alt="Enviando...">
+                </div>
+                <input class="btn"  type="submit" value="ENVIAR MENSAJE">
+            </form>
+            <article id="gracias" class="modal">
+                <div class="modal-content">
+                    <article class="contact-form-response">
+                        <h3>¡Muchas Gracias! <br> Por tus comentarios </h3>
+                        <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><path d="M12,18c4,0,5-4,5-4H7C7,14,8,18,12,18z"/><path d="M12,2C6.486,2,2,6.486,2,12c0,5.514,4.486,10,10,10s10-4.486,10-10C22,6.486,17.514,2,12,2z M12,20c-4.411,0-8-3.589-8-8 s3.589-8,8-8s8,3.589,8,8S16.411,20,12,20z"/><path d="M13 12l2 .012C15.012 11.55 15.194 11 16 11s.988.55 1 1h2c0-1.206-.799-3-3-3S13 10.794 13 12zM8 11c.806 0 .988.55 1 1h2c0-1.206-.799-3-3-3s-3 1.794-3 3l2 .012C7.012 11.55 7.194 11 8 11z"/></svg>
+
+                    </article>
+                </div>
+            </article>
+```
+
+
+### Maquetado Responsivo sección Contacto
+
+estas cards son muy particulares del diseño de este sitio, entonces las voy a colocar en la seccion de la hoja de estilos que se llama ``Site Styles``.
+
+auque no tiene borde el efecto de sombra de la clase _box-shadow_ delimitan la caja
+
+```css
+
+```
+
+> con el `margin` hago que se separen entre ellas.
+
+> con el `padding` hago que se separe desde el borde
+
+ve que el icono de _social media_, ve que el color de relleno no es color Rosa, eso lo solucionamos con CSS
 
 
