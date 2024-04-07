@@ -1433,7 +1433,29 @@ estas cards son muy particulares del diseño de este sitio, entonces las voy a c
 auque no tiene borde el efecto de sombra de la clase _box-shadow_ delimitan la caja
 
 ```css
+    .contact-card{
+   margin: 1rem auto; 
+   padding: 2rem; 
+   width: 100%;/*que herede el 100% del contenedor en el que están */   
+   height: 144px; /*por que esa altura está en el Figma*/
+   display: flex;
+   flex-direction: column;
+   justify-content: space-around;
+   align-items: center; /*en el eje transversal que en este caso seia x */
+}
 
+.contact-card > svg {
+    width: 2rem;
+    height: 2rem;
+    fill: var(--first-color);
+}
+
+/*oye, dentro de contact card yo sé que tienes una etiqueta _small_ que
+es hija directa*/
+
+.contact-card > small{
+    margin-top: -1rem; /*hace que el contenido se suba*/
+}
 ```
 
 > con el `margin` hago que se separen entre ellas.
@@ -1443,3 +1465,201 @@ auque no tiene borde el efecto de sombra de la clase _box-shadow_ delimitan la c
 ve que el icono de _social media_, ve que el color de relleno no es color Rosa, eso lo solucionamos con CSS
 
 
+los iconos de social media tiene un _text decoration_ el  _underline_ predeterminado de los enlaces y se vé como extraño y vamos a separar un poco mas los iconos de las redes sociales, para eso nos vamos a yudar de flexbox en direccion de fila (mejo usamos padding a los 4 lados)
+
+```css
+    /*para quitar el text decoratin a los iconos*/
+.social-media a {
+    padding: 0 0.4rem;
+    text-decoration: none;
+}
+.social-media svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
+```
+
+Aplicamos la responsividad. en el figma podemos ver que en la vercion de escritorio las _cards_ están a dos columnas
+
+**¿Como se llama el selector donde están esas targetas?**
+
+se llama _contact-cards_ a este selector aplicamos `display: grid` en la _media query_ de la tablet y despues en la version de escritorio.
+
+```css
+    /*tableta*/
+    @media screen and (min-width:48em){
+
+    .contact-cards{
+        display: grid;
+        grid-template-columns: repeat(2, 48%);
+        justify-content: space-between;   
+        }
+    }
+    /*pc-escritorio*/
+    @media screen and (min-width:64em){
+        .contact-cards{
+        grid-template-columns: repeat(4, 24%);
+    }
+    }
+```
+
+### Maquetando Formulario
+
+Si lo analisas el formulario de contacto yo me lo podria llevar a otro proyecto y podria ser funcional. Entonces lo **ponemos** dentro de la seccion de _Components_ (componenetes)
+
+>  **diferencia entre colocar y poner**: _En resumen, el acto físico de dejar algo en algún lugar puede ser poner o colocar (no es lo mismo colocar un vaso en la mesa que el acto de que la gallina ponga huevos). Todo aquello que sea inmaterial, como la fe, funciona con poner._
+
+> Recuerda: _los `inputs` son elementos de linea, entonces voy a decirle que todos los hijos directos del formulario sin importar que tipo de selector es (para eso me voy a ayudar del selector universal) o sea no mi importa si es un input-text, si es un text-area, si es un input email_
+
+
+![error-header](/assets/error-header.JPG)
+
+me dio este error en la cabezera pensé que era los valores `stiky` o `fixed` pero se soluciono con solo darle tamaño de `width: 100%;` al elemento text area.
+
+Ahora, ve que la tipografia de los _imputs_ y _text-area_ son diferentes tipografias entonces vamos a estandarizarlo.
+
+Tenemos un triangulito en el textarea que hace cambiar el tamaño
+
+Tenemos un input de tipo _submit_ pero vamos a agregarle la manita.
+
+El _lodader_ va a aparecer cuando se envie el formulario, de entrada tiene que estar oculto
+
+vamos a aplicar estilos a los _placeholders_
+
+```css
+    /* ***** Contact Form ***** */
+
+.contact-form {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 800px;
+}
+/*oye, todo los elementos que son hijos directos de contact form sin 
+importar que tipo de etiqueta o selector es, le vas a aplicar lo siguiente
+*/
+.contact-form > *{
+    padding: 0.5rem;
+    margin: 1rem auto;/*arriba y abajo, automático a los lados*/
+    display: block;
+    width: 100%; /*le damos el 100% de su contenedor*/
+}
+
+/*todo los imputs que están dentro del contact form y toda las text-areas
+que estén dentro del contar-form aplicales:*/
+
+.contact-form input,
+.contact-form textarea{
+    font-size: 0.85rem;
+    font-family: var(--font);
+}
+
+.contact-form input{
+    border: 0;/*quitamos todo los bordes*/
+    padding-left: 0; /*esto es para que el texto se alinea al borde asé está en figma*/
+    border-bottom: thin solid var(--gray-dark-color);
+
+}
+
+.contact-form textarea {
+    border: thin solid var(--gray-dark-color);
+    resize: none; /*para desaparecer el triangulito*/
+}
+
+.contact-form input[type="submit"]{
+    margin-top: 0;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+.contact-form input[type="submit"]:hover{
+    opacity: 0.75;
+}
+
+/*dentro de contact-form a todo los elementos hijos pero que tengan
+la pseudoclase Placeholder ponele:*/
+.contact-form *::placeholder{
+    color: var(--gray-dark-color);
+}
+```
+
+Ahora vamos a maquetar la ventana modal. Hay que activarle el atributo _Target_ asi:
+
+```css
+    .modal[id|="trabajo"]:target{
+    opacity: 1;
+    pointer-events: auto;
+}
+```
+
+¿Como se llama el id de la ventana modal del mensaje de agradecimiento del formulario? #gracias
+
+```css
+    /*El elmento que tenga la clase modal y que enta el Id = gracias 
+cuando sea target de la página aplicale:*/
+.modal#gracias:target{
+    opacity: 1;
+    pointer-events: auto;
+}
+```
+
+para hacer prueba ponle a la url el `/#gracias` así:
+
+![gracias](/assets/gracias.JPG)
+
+Maquetamos el mensaje de agradecimiento que tiene este selector `contact-form-response`
+
+```css
+    .contact-form-response{
+    padding: 1rem;
+    width: 400px;
+    text-align: center;
+    background-color: var(--white-color);
+}
+/*rellenamos el svg*/
+.contact-form-response svg{
+    margin-top: 2rem;
+    width: 4rem;
+    height: 4rem;
+    fill: var(--first-color);
+}
+```
+
+Esta ventana modal no tiene el boton de _close_ por que ese mensaje se va mostrar cuando el formulario se envie y a los 2 o 3 segundos lo vamos a desaparecer automáticamente 
+
+voy a quitrar el `#gracias` de la url para que ya no sea el target y se oculte de la ventana modal.
+
+### Responsive Formulario
+
+vamos a maquetar nuestro formulario para la version _Desktop_ y vamos a usar grid css por que `nombre` y `correo` tienen que estar a la par
+
+> Importante: voy a quitar la clase `none` al _loader_ por que hay que considerar como va aparecer, ya vimos que en version movil y tableta aparece centrado entre la `textarea` y el boton, pero cuando apliquemos el `display:grid` hay que ver como se va comportando por el flujo de los elementos
+
+```css
+    @media screen and (min-width: 64rem){
+
+    .contact-form{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 1rem; /*espaciado entre columnas*/
+    }
+
+    .contact-form input,
+    .contact-form textarea{
+        font-size: 1rem;
+    }
+    
+    /*para que el loader tambien ocupe 2 espacios*/
+    .contact-form textarea,
+    .contact-form-loader{
+        grid-column: span 2;
+    }
+
+    .contact-form input[type="submit"]{
+        margin-left: 0; /*hace que se pegue a la izquierda*/
+    }
+}
+```
+
+vuelvo a poner la clase `none` al _loader_  el cual va aparecer cuando ejecutemos la programación.
+
+###

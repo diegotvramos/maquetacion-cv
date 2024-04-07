@@ -203,6 +203,105 @@ p{
     background-color: var(--gray-dark-color);
 }
 
+/* ***** Contact Form ***** */
+
+.contact-form {
+    margin: 2rem auto;
+    padding: 1rem;
+    max-width: 800px;
+}
+/*oye, todo los elementos que son hijos directos de contact form sin 
+importar que tipo de etiqueta o selector es, le vas a aplicar lo siguiente
+*/
+.contact-form > *{
+    padding: 0.5rem;
+    margin: 1rem auto;/*arriba y abajo, automático a los lados*/
+    display: block;
+    width: 100%; /*le damos el 100% de su contenedor*/
+}
+
+/*todo los imputs que están dentro del contact form y toda las text-areas
+que estén dentro del contar-form aplicales:*/
+
+.contact-form input,
+.contact-form textarea{
+    font-size: 0.85rem;
+    font-family: var(--font);
+}
+
+.contact-form input{
+    border: 0;/*quitamos todo los bordes*/
+    padding-left: 0; /*esto es para que el texto se alinea al borde asé está en figma*/
+    border-bottom: thin solid var(--gray-dark-color);
+
+}
+
+.contact-form textarea {
+    border: thin solid var(--gray-dark-color);
+    resize: none; /*para desaparecer el triangulito*/
+}
+
+.contact-form input[type="submit"]{
+    margin-top: 0;
+    cursor: pointer;
+    transition: all 0.5s ease-in-out;
+}
+.contact-form input[type="submit"]:hover{
+    opacity: 0.75;
+}
+
+/*dentro de contact-form a todo los elementos hijos pero que tengan
+la pseudoclase Placeholder ponele:*/
+.contact-form *::placeholder{
+    color: var(--gray-dark-color);
+}
+
+.contact-form-response{
+    padding: 1rem;
+    width: 400px;
+    text-align: center;
+    background-color: var(--white-color);
+}
+/*rellenamos el svg*/
+.contact-form-response svg{
+    margin-top: 2rem;
+    width: 4rem;
+    height: 4rem;
+    fill: var(--first-color);
+}
+
+/*El elmento que tenga la clase modal y que enta el Id = gracias 
+cuando sea target de la página aplicale:*/
+.modal#gracias:target{
+    opacity: 1;
+    pointer-events: auto;
+}
+
+
+@media screen and (min-width: 64rem){
+
+    .contact-form{
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: 1rem; /*espaciado entre columnas*/
+    }
+
+    .contact-form input,
+    .contact-form textarea{
+        font-size: 1rem;
+    }
+    
+    /*para que el loader tambien ocupe 2 espacios*/
+    .contact-form textarea,
+    .contact-form-loader{
+        grid-column: span 2;
+    }
+
+    .contact-form input[type="submit"]{
+        margin-left: 0; /*hace que se pegue a la izquierda*/
+    }
+}
+
 /* ***** HeroImage ***** */
 .hero-image{
     background-image: var(--hero-image);
@@ -514,6 +613,19 @@ progress::-moz-progress-bar{
    align-items: center; /*en el eje transversal que en este caso seia x */
 }
 
+.contact-card > svg {
+    width: 2rem;
+    height: 2rem;
+    fill: var(--first-color);
+}
+
+/*oye, dentro de contact card yo sé que tienes una etiqueta _small_ que
+es hija directa*/
+
+.contact-card > small{
+   /*margin-top: -1rem; /*hace que el contenido se suba*/
+}
+
 .header{
     position: fixed; 
     left: 0;
@@ -626,8 +738,26 @@ progress::-moz-progress-bar{
     fill: var(--first-color);
 }
 
+
+/*para quitar el text decoratin a los iconos*/
+.social-media a {
+    padding: 0 0.4rem;
+    text-decoration: none;
+}
+.social-media svg {
+    width: 1.5rem;
+    height: 1.5rem;
+}
+
 /* @media screen and (min-width:768px){ */
 @media screen and (min-width:48em){
+
+    .contact-cards{
+        display: grid;
+        grid-template-columns: repeat(2, 48%);
+        justify-content: space-between;
+        
+    }
 
     .portfolio > .container{ /*adentro tienes un hijo(elemento) directo*/
         display: grid;
@@ -671,6 +801,10 @@ progress::-moz-progress-bar{
        align-content: center; /*en el eje de Y me lo alinea el contenido al centro*/
     }
     
+    .contact-cards{
+        grid-template-columns: repeat(4, 24%);
+    }
+
     .carousel{
         max-width: 800px;
     }
