@@ -299,6 +299,7 @@ cuando sea target de la página aplicale:*/
 
     .contact-form input[type="submit"]{
         margin-left: 0; /*hace que se pegue a la izquierda*/
+
     }
 }
 
@@ -625,6 +626,13 @@ es hija directa*/
 .contact-card > small{
    /*margin-top: -1rem; /*hace que el contenido se suba*/
 }
+.footer{
+    margin-bottom: var(--header-height);
+    padding: 0.5rem;
+    text-align: center;
+    color: var(--white-color);
+    background-color: var(--third-color);
+}
 
 .header{
     position: fixed; 
@@ -807,6 +815,10 @@ es hija directa*/
 
     .carousel{
         max-width: 800px;
+    }
+
+    .footer{
+        margin-bottom: 0;
     }
 
     .header{

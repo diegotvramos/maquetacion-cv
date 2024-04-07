@@ -1662,4 +1662,152 @@ vamos a maquetar nuestro formulario para la version _Desktop_ y vamos a usar gri
 
 vuelvo a poner la clase `none` al _loader_  el cual va aparecer cuando ejecutemos la programación.
 
-###
+### Programación Formulario
+
+vamos a utilizar:
+
+**[formsubmit.co](https://formsubmit.co/)**
+
+**[documentación](https://formsubmit.co/ajax-documentation)**
+
+Para que la información del formulario nos llege por correo electrónico.
+
+Si yo quisiere utilizar esta programacion en un siguiente proyecto, voy a trabajar la misma tecnica de envolver toda la programación  que se requiere para este formulario en una **Funcion Anomima Autoejecutable** para que no entre en conflicto la programación y el _Scope_ de variables de un ejercicio con el otro, ala _Arrow-function_ le voy a pasar el _Document_
+
+> recuerda: todo lo que tienen que ver con peticiones Ajax tiene que ejecutarse en un entorno de servidor en este caso _live-server_
+
+
+
+> en el _console.log_ me llegó este mensaje, y dice: "Este formulario necesita activación. Te hemos enviado un correo electrónico...tinta. ¡Simplemente haz clic en él y tu formulario se activará!" 
+
+![activación](/assets/activacion.JPG)
+
+en resumen hay que activar desde el correo
+
+![activado](/assets/activado.JPG)
+
+```javaScript
+    /* ***** ContactForm ***** */
+
+((d) => {
+    /*declaramos las variables */
+    const   $form = d.querySelector(".contact-form"),
+            $loader = d.querySelector(".contact-form-loader"),
+            $response = d.querySelector(".contact-form-response"); /*es la respuesta del formulario*/
+
+    /*¿Por qué empiezan con $? 
+        por que es una buena práctica que toda las variables que hagan referencias a elementos del DOM
+        se les anteponga la palabra variable para que tu como programador sepas cuando una variable es
+        dentro de la lógica de programacion y cuando es un elemento del DOM
+    */
+
+    //asignamos el evento submit al formulario
+
+    $form.addEventListener("submit", (e) =>{
+        e.preventDefault();
+        $loader.classList.remove("none");
+        fetch("https://formsubmit.co/ajax/diegovillacortaramos@gmail.com", {
+            method: "POST",
+            //especificamos la información que se vá a a enviar, el formulario
+            // declaro una variable tipo FormData
+            body: new FormData(e.target)
+        })//Fetch trabaja con promesas entonces aca vamos a ejecutar los metodos 'then()'
+        .then((res) => (res.ok ? res.json():Promise.reject(res))) //operador ternario
+        .then(json =>{
+            console.log(json);
+            
+            /*vamos a activar la ventana modal de agradecimiento, ¿Como hago que el target esté en la ventana modal?
+            ¿Como hago que el target esté en la ventana modal?
+            Pues si yo a la Url le agrego en la parte del hash '#' el id gracias, entonces:
+            vamos a usar el objeto `LOCATION`(controla toda las partes de la url que se escribe en la barra de direcciones
+            de nuestro navegador) 
+            */
+            location.hash = "#gracias";
+            $form.reset(); //resetea el formulario
+        })
+        .catch(err => {
+            console.log(err);
+            let message = err.statusText || "Ocurrió un error al enviar, intenta nuevamente";
+            $response.querySelector("h3").innerHTML = 
+            `Error ${err.status}: ${message}`;
+        })//Se ejecuta independientemente de que se cumpla o se rechaze la promesa.
+        .finally(() => {
+            $loader.classList.add("none");
+            setTimeout(() => {
+                location.hash ="#close";
+            }, 3000);
+        })
+    })
+})(document);
+```
+
+### Maquetando Footer y secciones Bonus
+
+El footer se mantiene abajo en cualquier parte de las 3 versiones de dispositivos.
+
+El footer es particular de este sitio entonces lo voy a poner en la seccion 'Estilos Particulares' 
+
+> ! en la version movil no se vé nuestro _footer_
+
+¿Como hago para que la cabezera que está fija, aunque el ultimo contenido no se alcanze a ver que este caso es el footer? **pues simplemente darle un _margin-bottom_** al footer del mismo tamaño de la altura de la cabezera, y recuerda que la altura de la cabezera la tenemos guardada en una variable
+
+```css
+    .footer{
+    margin-bottom: var(--header-height);
+    padding: 0.5rem;
+    text-align: center;
+    color: var(--white-color);
+    background-color: var(--third-color);
+}
+```
+
+**BONUS**
+
+Vamos a darle las metaetiquetas necesarias que necesita cualquier sitio para que se posicione a nivel de SEO 
+
+> las metaetiquetas son para redes sociales
+
+SEO BASICO: la etiqueta `<title>` si tu sitio o aplicacion tiene diferentes vistas, diferentes rutas diferentes archivos html cada ruta 'debe tener su propio `title` y su propia metadescripcion'
+
+
+Google detecta que aparte de el sitio 2 paginas  muy visitadas es la seccion de 'cursos' y la seccion de 'blog' y ve como tienen diferentes titulos y tambien diferentes descripciones.
+
+> un error tipico es ponerle el mismo titulos  y la misma meta descripcion a todo los documuentos o las rutas de tu sitio o aplicacion entonces ya sabes que debes de poner diferentes
+
+Para que la targeta se forme en las redes sociales reconozca la imagen, la ruta de las imágenes tiene que ser la ruta absoluta. A diferencia de las las imagenes que ponemos en el sitio que es una ruta relativa por que nada mas donde está el documento accedemos entrando a una carpeta en este caso `assets` y desde ahi mandamos a llamar la imagen.
+
+Para todo lo que tiene que ver con meta etiquetas hay que poner la ruta original la ruta absoluta eje: 
+> ``
+
+no vasta con solo poner la ruta como estamos acostumbrados a hacerla, hay que poner la ruta absoluta.
+
+> cuando ya tengamos el respositorio de github vamos a tener la url absoluta, mietras vamos a poner un texto que diga
+
+
+¿que tipo de archivo debe ir en la parte de favicon en html?
+
+>- En la mayoría de los navegadores, los faviconos deben responder a las dimensiones 16 x 16 píxeles o 32 x 32 píxeles y, si es posible, deben guardarse en formato . ico, . gif o . png. 
+
+para eso usé:
+
+[favicon-generator](https://favicon.io/favicon-generator/)
+
+
+la `url canonical` le dice a los buscadores cual es la url oficial que tiene que posicionar de una ruta en particular de tu sitio o aplicacion en este sitio que es un portafolio de tipo landing page que hay solo un documento html no hay problema, pero es muy importante por ejemplo en sitios de comercio electronico, por ejemplo cuando tu llegas a la página de un producto en particular podrias llegar de diferentes formas. 
+
+puedes llegar pro una url que imprime el ID del producto en la url, quizas puedes llegar por una url amigable ``/marca/tipo-producto/nombre-producto`` 
+
+Ahora imagina que llegas por que sigues a un influenser y llegaste por un enlace de afiliado de tu influencer favorito, entonces agrega el ID del afiliado a la url, entonces ve que para llegar a un producto podrias llegar por diferentes urls y eso está penalizado osea **tener varias rutas para llegar a un mismo contenido lo penalizan los motores de busqueda** pero hay sitios como los comercios electronicos que es imposible tener solo una URL 
+
+Entonces para evitar que los buscadores te penalizen por esas circunstancias para eso se creó la etiqueta de la url `url canonical` por que esta le dice a los motores de busqueda 'yo se que quizá los usuarios puedan llegar con diferentes urls a este contenido, pero la url que yo te estoy dando en el `canonical` es la que tu tienes que considerar como la principal' y con esto te evitas la penalizacion por tener diferentes urls
+
+
+
+
+
+
+
+
+
+> vamos a subir a un servidor web, en este caso github.
+
