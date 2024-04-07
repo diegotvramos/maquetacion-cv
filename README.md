@@ -1,5 +1,5 @@
 
-
+[link](https://diegotvramos.github.io/maquetacion-cv/)
 
 # Taller de Maquetación: Landing Page tipo Portafolio-CV de Figma a Código HTML y CSS
 
@@ -1803,11 +1803,26 @@ Entonces para evitar que los buscadores te penalizen por esas circunstancias par
 
 
 
-
-
-
-
-
-
 > vamos a subir a un servidor web, en este caso github.
+
+#### Subir proyecto a github
+
+...
+
+cuando accedes al repositorio usas esta url
+
+> `https://github.com/diegotvramos/maquetacion-cv`
+
+y cuando quieres acceder al hosting que nos da ``github-pages`` la ruta se invierte
+
+
+> `https://diegotvramos/diegotvramos/maquetacion-cv`
+
+
+
+
+
+
+
+
 
