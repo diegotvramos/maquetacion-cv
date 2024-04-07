@@ -1826,7 +1826,7 @@ pordemos remplazarlo con vs-code
 
 `git push -u origin gh-pages`
 
-`-u `para que ya no tengamos que poner : `origin gh-pages` ?
+`-u `para que ya no tengamos que poner : `origin gh-pages` ? pero esto ya lo hacemos en el repositorio con la ramam main. por lo tanto creo que debemos subirlo como siempre lo hemos hecho. 👍👍git 
 
 
 
