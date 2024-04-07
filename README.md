@@ -1824,6 +1824,9 @@ pordemos remplazarlo con vs-code
 ![remplazando](/assets/remplazando.JPG)
 
 
+`git push -u origin gh-pages`
+
+`-u `para que ya no tengamos que poner : `origin gh-pages` ?
 
 
 
