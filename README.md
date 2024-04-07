@@ -1819,7 +1819,9 @@ y cuando quieres acceder al hosting que nos da ``github-pages`` la ruta se invie
 > `https://diegotvramos/diegotvramos/maquetacion-cv`
 
 
+pordemos remplazarlo con vs-code
 
+![remplazando](/assets/remplazando.JPG)
 
 
 
