@@ -1828,6 +1828,14 @@ pordemos remplazarlo con vs-code
 
 `-u `para que ya no tengamos que poner : `origin gh-pages` ? pero esto ya lo hacemos en el repositorio con la ramam main. por lo tanto creo que debemos subirlo como siempre lo hemos hecho. 👍👍git 
 
+DIOS 🧔🧔🧔 como tarde en centrar las slides.
 
+primero lo traté de hacer con flexbox, pero solo alinea.
+
+pero necesito que se rellene las li no hacen caso a los tamaños de ancho que le daba y entonces me di cuenta que solo se agrandaban a medida que el contenido crecia.
+y no necesitaba espacio, lo cual flexbox no podia rellenar.
+
+Luego pensé 🤔💭💭💭 por que mejor uso grid,
+Y Lo solucionó se vé como yo lo queria ver  SIUUUUUU.🤝🤝 👏👏
 
 
